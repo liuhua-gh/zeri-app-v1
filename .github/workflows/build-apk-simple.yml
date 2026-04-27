@@ -26,7 +26,8 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential git python3-dev openjdk-17-jdk
-        sudo apt-get install -y automake autoconf libtool pkg-config libncurses-dev libncursesw5-dev cmake libffi-dev libssl-dev zlib1g-dev zip unzip
+        sudo apt-get install -y automake autoconf libtool libtool-bin m4 pkg-config
+        sudo apt-get install -y libncurses-dev libncursesw5-dev cmake libffi-dev libssl-dev zlib1g-dev zip unzip
 
     - name: Configure git mirrors for submodules
       run: |
