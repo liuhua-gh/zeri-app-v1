@@ -19,11 +19,18 @@ jobs:
     - name: Configure git mirror for skcms
       run: |
         git config --global url."https://github.com/google/skcms".insteadOf "https://skia.googlesource.com/skcms"
+
+    - name: Install build tools in container
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install --user buildozer cython
+        echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        "$HOME/.local/bin/buildozer" --version
     
     - name: Build APK
       run: |
         set -o pipefail
-        buildozer android debug 2>&1 | tee buildozer.log
+        "$HOME/.local/bin/buildozer" android debug 2>&1 | tee buildozer.log
       env:
         BUILDOZER_WARN_ON_ROOT: 0
     
