@@ -27,6 +27,10 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential git python3-dev openjdk-17-jdk
         sudo apt-get install -y automake libtool pkg-config libncurses5-dev cmake libffi-dev libssl-dev
+
+    - name: Configure git mirrors for submodules
+      run: |
+        git config --global url."https://github.com/google/skcms".insteadOf "https://skia.googlesource.com/skcms"
     
     - name: Build APK
       run: |
