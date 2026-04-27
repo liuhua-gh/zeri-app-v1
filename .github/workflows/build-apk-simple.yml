@@ -32,6 +32,14 @@ jobs:
     - name: Configure git mirrors for submodules
       run: |
         git config --global url."https://github.com/google/skcms".insteadOf "https://skia.googlesource.com/skcms"
+
+    - name: Pin pip toolchain versions for p4a venv
+      run: |
+        cat > pip-constraints.txt << 'EOF'
+        pip==24.3.1
+        setuptools==75.6.0
+        wheel==0.45.1
+        EOF
     
     - name: Build APK
       run: |
@@ -39,6 +47,7 @@ jobs:
         buildozer android debug 2>&1 | tee buildozer.log
       env:
         BUILDOZER_WARN_ON_ROOT: 0
+        PIP_CONSTRAINT: ${{ github.workspace }}/pip-constraints.txt
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
