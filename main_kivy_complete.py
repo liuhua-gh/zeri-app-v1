@@ -18,13 +18,15 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelHeader
 from kivy.uix.popup import Popup
 from kivy.uix.checkbox import CheckBox
-from kivy.core.window import Window
+from kivy.core.text import LabelBase
 from kivy.properties import StringProperty, ListProperty, ObjectProperty
 from kivy.clock import Clock
 from kivy.graphics import Color, Rectangle
+from kivy.utils import platform
 
-# 设置窗口大小（模拟手机屏幕）
-Window.size = (400, 700)
+# Android 端默认 Roboto 不含完整中文字形，改为系统 CJK 字体避免方框字。
+if platform == 'android':
+    LabelBase.register('Roboto', '/system/fonts/NotoSansCJK-Regular.ttc')
 
 # 导入必要的模块
 from datetime import date, datetime, timedelta
